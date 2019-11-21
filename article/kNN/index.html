@@ -179,14 +179,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -274,7 +274,7 @@ K近邻法不具有显式的学习过程，而是利用训练数据集对特征�
 那么现在给出一个肿瘤患者的数据（样本点）x：[8.90933607318, 3.365731514]，是良性肿瘤还是恶性肿瘤,求距离：<br>
 首先描绘出样本点所在位置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(X_train[y_train==0,0],X_train[y_train==0,1], color=&apos;g&apos;, label = &apos;Tumor Size&apos;)</span><br><span class="line">plt.scatter(X_train[y_train==1,0],X_train[y_train==1,1], color=&apos;r&apos;, label = &apos;Time&apos;)</span><br><span class="line">plt.xlabel(&apos;Tumor Size&apos;)</span><br><span class="line">plt.ylabel(&apos;Time&apos;)</span><br><span class="line">plt.axis([0,10,0,5])</span><br><span class="line">plt.scatter(x[0],x[1],color = &apos;b&apos;)c #换用蓝色描绘样本点</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/img/article/x%E6%A0%B7%E6%9C%AC%E7%82%B9.jpg" alt="Theme Annie"></p>
+<p><img src="/img/article/x%E6%A0%B7%E6%9C%AC%E7%82%B9.jpg" alt="Theme Annie"></p>
 <p>我们要做的是：求点x到数据集中每个点的距离，首先计算距离，使用欧氏距离</p>
 <h3 id="knn过程">kNN过程</h3>
 <h4 id="统计知识回顾">统计知识回顾</h4>
@@ -365,6 +365,10 @@ array([8, 7, 5, 6, 9, 3, 0, 1, 4, 2], dtype=int64)<br>
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/BasicConceptions/" data-toggle="tooltip" data-placement="top" title="BasicConceptions">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">

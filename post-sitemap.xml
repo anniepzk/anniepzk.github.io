@@ -9,7 +9,7 @@
 
     <url>
         <loc>https://anniepzk.cn/article/hexo-theme-annie/</loc>
-        <lastmod>2019-11-20T10:36:24.732Z</lastmod>
+        <lastmod>2019-11-20T11:07:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +17,15 @@
 
     <url>
         <loc>https://anniepzk.cn/article/kNN/</loc>
-        <lastmod>2019-11-20T10:36:20.729Z</lastmod>
+        <lastmod>2019-11-20T11:07:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://anniepzk.cn/article/BasicConceptions/</loc>
+        <lastmod>2019-11-17T16:47:22.332Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

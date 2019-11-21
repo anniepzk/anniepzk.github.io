@@ -18,11 +18,11 @@
 	<script async defer src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/js/buttons.js"></script>
     <title>
         
-          服务器上配置Jupyter-NoteBook被远程访问 - Annie | Blog
+          BasicConceptions - Annie | Blog
         
     </title>
 
-    <link rel="canonical" href="https://anniepzk.cn/article/服务器上配置Jupyter-NoteBook被远程访问/">
+    <link rel="canonical" href="https://anniepzk.cn/article/BasicConceptions/">
 
     <!-- Bootstrap Core CSS -->
     <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
@@ -97,7 +97,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/article_header/article-bg.jpg')
+            background-image: url('/img/article_header/article_header.png')
             /*post*/
         
     }
@@ -108,7 +108,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/img/article_header/article-bg.jpg')
+            background-image: url('https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/img/article_header/article_header.png')
             /*post*/
         
     }
@@ -125,18 +125,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#python" title="python">python</a>
-                            
-                              <a class="tag" href="/tags/#jupyter" title="jupyter">jupyter</a>
-                            
-                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                              <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
                             
                         </div>
-                        <h1>服务器上配置Jupyter-NoteBook被远程访问</h1>
-                        <h2 class="subheading">Jupyter-NoteBook</h2>
+                        <h1>BasicConceptions</h1>
+                        <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Annie on
-                            2019-10-29
+                            2019-11-21
                         </span>
                     </div>
                 
@@ -253,65 +249,128 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>Jupyter Notebook（此前被称为 IPython notebook）是一个交互式笔记本，支持运行 40 多种编程语言。<br>
-Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文学化程序文档，支持实时代码，数学方程，可视化和 markdown。 用途包括：数据清理和转换，数值模拟，统计建模，机器学习等等</p>
+                <h3 id="1-训练数据集amp测试数据集">1. 训练数据集&amp;测试数据集</h3>
+<p>机器学习经过训练得到的模型，其意义在于真实环境中的使用。如果把 全部的原始数据当做训练集直接训练出模型，然后投入到真实环境中，这种做法是不恰当的，会存在问题 ：</p>
+<ol>
+<li>如果模型效果很差，没有机会通过实际调试就直接应用到实际当中，怎么办？（# 实例：股市预测）</li>
+<li>在真实环境中，开发者难以拿到真实label（输出结果），则无从得知模型的效果？（# 实例：银行发放信用卡）</li>
+</ol>
+<p>方案：训练数据集与测试数据集切分（train test split），将原始数据的80%作为训练数据来训练模型，另外20%作为测试数据，通过测试数据直接判断模型的效果，在模型进入真实环境前改进模型；</p>
+<p>1.方法一：对X和y的indexes进行乱序处理，根据乱序后的index从x和y中分割出训练数据集和测试数据集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#代码待补充</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>方法二：将X于y相加后做乱序处理，再分离出训练数据集和测试数据集</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#代码待补充</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>np.random.permutation(100)：将0~100个数随机排列；# permutation()只接受一个参数；</li>
+<li>由于对indexes的乱序处理带有随机性，如果想再次查看历史数据，可设定随机种子，得到历史随机数；</li>
+</ol>
+<h3 id="2-分类准确度accuracy">2. 分类准确度accuracy</h3>
+<p>在划分出测试数据集后，我们就可以验证其模型准确率了。在这了引出一个非常简单且常用的概念：accuracy（分类准确度）</p>
+<blockquote>
+<p>accuracy_score：函数计算分类准确率，返回被正确分类的样本比例（default）或者是数量（normalize=False）<br>
+在多标签分类问题中，该函数返回子集的准确率，对于一个给定的多标签样本，如果预测得到的标签集合与该样本真正的标签集合严格吻合，则subset accuracy =1.0否则是0.0</p>
 </blockquote>
-<h2 id="安装">安装</h2>
-<p>Jupyter Note依赖的第三包比较多，所以不推荐大家使用系统环境的Python来安装Jupyter，建议大家虚拟一个纯净的虚拟环境来安装Jupyter，我使用的是Virtualenv+Virtualenvwrapper来控制Python第三包环境，大家记得注意Pip安装Jupyter对应的Python解释器版本，这决定安装后Jupyter的使用所依赖的Python解释器版本，这里我使用的是Pyenv来控制Python解释器版本，大家也可以使用官方推荐的Pipenv，这个根据个人的熟悉度而言。具体安装过程如下：</p>
-<h3 id="创建虚拟环境">创建虚拟环境</h3>
-<p><code>mkvirtualenv jupyter_workspace</code></p>
-<h3 id="安装jupyter">安装jupyter</h3>
-<p>这里我使用了国内Pip源，下载速度比较快！推荐大家使用pip管理工具安装库文件的时候使用国内Pip源。</p>
-<p><code>pip install -i https://pypi.douban.com/simple/ jupyter</code></p>
-<h2 id="环境配置">环境配置</h2>
-<h3 id="生成默认配置文件">生成默认配置文件</h3>
-<p>默认情况下，配置文件 **~/.jupyter/jupyter_notebook_config.py **并不存在，需要自行创建。使用下列命令生成配置文件：</p>
-<p><code>jupyter notebook --generate-config</code></p>
-<p>执行成功后，会出现下面的信息：</p>
-<p>Writing default config to: /home/lee/.jupyter/jupyter_notebook_config.py</p>
-<h3 id="生成密码">生成密码</h3>
-<h4 id="自动生成">自动生成</h4>
-<p>从jupyter notebook 5.0 版本开始，提供了一个命令来设置密码:</p>
-<p><code>jupyter-notebook password</code></p>
-<p>执行成功后，会出现下面的信息：</p>
-<p>Wrote hashed password to /home/lee/.jupyter/jupyter_notebook_config.json</p>
-<p>生成的密码存储在 <strong>jupyter_notebook_config.json</strong></p>
-<h4 id="手动生成">手动生成</h4>
-<p>除了使用提供的命令自动生成，也可以通过手动安装。手动安装不方便的地方在于我们需要自己生成<code>sha1</code>，然后复制粘贴到配置文件<code>.jupyter/jupyter_notebook_config.py</code>进行配置，而且一旦我们需要修改密码的话还得重新进行一样的手动生成配置过程，这样显得很不方便。执行过程如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd</span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.leezc.cn/article/jupyter-passwd.png" alt="jupyter passwd"></p>
-<h3 id="修改配置文件">修改配置文件</h3>
-<p>要在服务器上配置Jupyter NoteBook被远程访问，需要我们进行一些定制化配置，在 jupyter_notebook_config.py中找到下面的行，取消注释并修改。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">c.NotebookApp.ip=<span class="string">'*'</span>   <span class="comment"># “*”代表非本机都可以访问</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.certfile = <span class="string">u'/absolute/path/to/your/certificate/fullchain.pem'</span>  <span class="comment"># 配置SSL证书公钥的绝对路径</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.keyfile = <span class="string">u'/absolute/path/to/your/certificate/privkey.key'</span>  <span class="comment"># 配置SSL证书私钥的绝对路径</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.open_browser = <span class="keyword">False</span>    <span class="comment"># 修改为在启动notebook的时候不启动浏览器，服务器上我们不需要。</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">'/home/lee/jupyter_workspace'</span>    <span class="comment"># 指定notebook服务的目录（缺省为运行jupyter命令时用户所在的目录，注意此目录不能为隐藏目录，记得要先创建这个目录，不然会报错）</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.port =<span class="number">9999</span> <span class="comment"># 指定notebook的服务端口号，默认8888，可自行指定一个端口, 访问时使用该端口</span></span><br></pre></td></tr></table></figure>
-<h2 id="运行jupyter">运行jupyter</h2>
-<h3 id="终端运行">终端运行</h3>
-<p><code>jupyter notebook</code></p>
-<h3 id="后台运行">后台运行</h3>
-<p>Systemd是目前新版的linux比较常用的管理后台服务的机制。在Linux的发行版Fedora、ArchLinux，Debian（8或以上），Ubuntu（15.04以上），CentOS，Redhat都使用systemd机制。这里我们使用systemd机制来配置Jupyter NoteBook来随系统自启，配置过程如下：</p>
-<p>创建文件/etc/systemd/system/jupyter.service:</p>
-<p><code>sudo vim /etc/systemd/system/jupyter.service</code></p>
-<p>文件内容为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Jupyter Notebook</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/home/zclee/workspace/jupyter_workspace/bin/jupyter-notebook</span><br><span class="line">User=zclee</span><br><span class="line">WorkingDirectory=/home/zclee/jupyter_workspace</span><br><span class="line">Group=www-data</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>ExecStart</strong>内容为** jupyter-notebook**可执行文件所在的绝对路径，这里我使用虚拟环境安装的，所以找到虚拟环境所在位置。</li>
-<li><strong>User</strong>内容为你当前用户名</li>
-<li><strong>WorkingDirectory</strong>内容为配置文件<strong>c.NotebookApp.notebook_dir</strong>项所配置内容</li>
-</ul>
-<p>配置并保存之后运行如下命令：</p>
-<ul>
-<li><code>sudo systemctl daemon-reload</code></li>
-<li><code>sudo systemctl enable jupyter</code></li>
-<li><code>sudo systemctl start jupyter</code></li>
-</ul>
-<p>这样我们可以愉快地使用Jupyter NoteBook啦！</p>
-<p>相关命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload  # 重新加载配置</span><br><span class="line"></span><br><span class="line">sudo systemctl enable jupyter  # 设置系统自启动</span><br><span class="line"></span><br><span class="line">sudo systemctl start jupyter  # 手动启动服务</span><br><span class="line"></span><br><span class="line">sudo systemctl status jupyter  # 查看服务状态</span><br><span class="line"></span><br><span class="line">sudo systemctl stop jupyter  # 手动停止服务</span><br><span class="line"></span><br><span class="line">sudo systemctl restart jupyter  # 手动重启服务</span><br><span class="line"></span><br><span class="line">sudo journalctl -f -u jupyter  # 查看日志输出</span><br><span class="line"></span><br><span class="line">sudo journalctl -f -u jupyter | grep -i 'error'  # 查看日志输出中的error部分</span><br><span class="line"></span><br><span class="line">sudo systemctl disable jupyter  # 自启动中去除服务</span><br></pre></td></tr></table></figure>
-<h4 id="nohup后台运行">nohup后台运行</h4>
-<p><code>(nohup jupyter notebook &gt; jupyter.log 2&gt;&amp;1 &amp;)</code></p>
-<p>相关命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lsof -i: 8899 # 查看运行端口</span><br><span class="line"></span><br><span class="line">netstat -an | grep 8899  # 查看运行端口</span><br><span class="line"></span><br><span class="line">tail -f/cat/more jy.log  # 查看运行日志</span><br><span class="line"></span><br><span class="line">kill -9 pid   # 杀死后台运行进程</span><br></pre></td></tr></table></figure>
-<p>更多配置可以查阅官方文档：<a href="https://jupyter-notebook.readthedocs.io/en/latest/public_server.html#notebook-server-security" target="_blank" rel="noopener">Jupyter NoteBook</a></p>
+<p>因accuracy定义清洗、计算方法简单，因此经常被使用。但是它在某些情况下并不一定是评估模型的最佳工具。精度（查准率）和召回率（查全率）等指标对衡量机器学习的模型性能在某些场合下要比accuracy更好。</p>
+<p>分类准确度在评价分类算法时，会有很大的问题的。分类算法的评价要比回归算法多很多。</p>
+<p>对于一个癌症预测系统，输入检查指标，判断是否患有癌症，预测准确度99.9%。这个系统是好是坏呢？</p>
+<p>如果癌症产生的概率是0.1%，那其实根本不需要任何机器学习算法，只要系统预测所有人都是健康的，即可达到99.9%的准确率。也就是说对于极度偏斜(Skewed Data)的数据，只使用分类准确度是不能衡量。</p>
+<p>这是就需要使用混淆矩阵(Confusion Matrix)做进一步分析。</p>
+<h3 id="3混淆矩阵">3.混淆矩阵</h3>
+<p>对于二分类问题来说，所有的问题被分为0和1两类，混淆矩阵是2*2的矩阵：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>预测值0</strong></th>
+<th><strong>预测值1</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实值0</td>
+<td>9978</td>
+<td>12</td>
+</tr>
+<tr>
+<td>真实值1</td>
+<td>2</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>对于1万个人中，有9978个人本身并没有癌症，我们的算法也判断他没有癌症；有12个人本身没有癌症，但是我们的算法却错误地预测他有癌症；有2个人确实有癌症，但我们算法预测他没有癌症；有8个人确实有癌症，而且我们也预测对了。</p>
+<p>因为混淆矩阵表达的信息比简单的分类准确度更全面，因此可以通过混淆矩阵得到一些有效的指标。</p>
+<h3 id="4精准率和召回率">4.精准率和召回率</h3>
+<p>根据混淆矩阵可以求得指标：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>预测值0</strong></th>
+<th><strong>预测值1</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实值0</td>
+<td>9978（TN）</td>
+<td>12（FP）</td>
+</tr>
+<tr>
+<td>真实值1</td>
+<td>2（FN）</td>
+<td>8（TP）</td>
+</tr>
+</tbody>
+</table>
+<p>$$<br>
+精准率 ：precision =\frac{TP}{TP+FP},<br>
+$$<br>
+即精准率为8/(8+12)=40%。所谓的准确率是分母为所有预测为1的个数，分子是其中预测对了的个数，即预测值为1，且预测对了的比例。</p>
+<p>即精准率为8/(8+12)=40%。所谓的精准率是：分母为所有预测为1的个数，分子是其中预测对了的个数，即<strong>预测值为1，且预测对了的比例</strong>。</p>
+<p>为什么管它叫精准率呢？在有偏的数据中，我们<strong>通常更关注值为1的特征</strong>，比如“患病”，比如“有风险”。在100次结果为患病的预测，平均有40次预测是对的。即<strong>精准率为我们关注的那个事件，预测的有多准。</strong></p>
+<p>召回率：<br>
+$$<br>
+召回率：           recall =\frac{TP}{TP+FN},<br>
+$$<br>
+即精准率为8/(8+2)=80%。所谓召回率是：<strong>所有真实值为1的数据中，预测对了的个数</strong>。每当有100个癌症患者，算法可以成功的预测出8个 。<strong>也就是我们关注的那个事件真实的发生情况下，我们成功预测的比例是多少。</strong></p>
+<p>那么为什么需要精准率和召回率呢？还是下面的这个例子，有10000个人，混淆矩阵如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测值0</th>
+<th><strong>预测值1</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实值0</td>
+<td>9978</td>
+<td>12</td>
+</tr>
+<tr>
+<td>真实值1</td>
+<td>2</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们粗暴的认为所有人都是健康的，那算法的准确率是99.78%，但这是毫无意义的。如果算精准率则是40%，召回率是80%。</p>
+<h3 id="评价回归结果相关概念">评价回归结果相关概念</h3>
+<h3 id="5均方误差mse">5.均方误差MSE</h3>
+<p>测试集中的数据量<code>m</code>不同，因为有<strong>累加操作</strong>，所以随着数据的增加 ，误差会逐渐积累；因此衡量标准和 <code>m</code> 相关。为了抵消掉数据量的形象，可以除去数据量，抵消误差。通过这种处理方式得到的结果叫做 <strong>均方误差MSE（Mean Squared Error）</strong>：<br>
+$$<br>
+\sqrt {\frac{1}{m}\sum_{i=1}^m(y_{test}^{(i)}-\tilde{y}_{test}^{(i)})^2}<br>
+$$</p>
+<h3 id="6平均绝对误差mae">6.平均绝对误差MAE</h3>
+<p>对于线性回归算法还有另外一种非常朴素评测标准。要求真实值 与 预测结果 之间的距离最小，可以直接相减做绝对值，加m次再除以m，即可求出平均距离，被称作<strong>平均绝对误差MAE（Mean Absolute Error）</strong>：<br>
+$$<br>
+\frac{1}{m}\sum_{i=1}^m|(y_{test}^{(i)}-\tilde{y}_{test}^{(i)}|<br>
+$$<br>
+在之前确定损失函数时，我们提过，绝对值函数不是处处可导的，因此没有使用绝对值。但是在评价模型时不影响。因此模型的评价方法可以和损失函数不同。</p>
 
                 
 
@@ -319,10 +378,10 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/hexo-theme-annie/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme Annie">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/article/kNN/" data-toggle="tooltip" data-placement="top" title="机器学习算法_kNN的原理及实现">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -414,7 +473,7 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安装"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5B89;&#x88C5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建虚拟环境"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x73AF;&#x5883;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#安装jupyter"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x5B89;&#x88C5;jupyter</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#环境配置"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x73AF;&#x5883;&#x914D;&#x7F6E;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#生成默认配置文件"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x751F;&#x6210;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#生成密码"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x751F;&#x6210;&#x5BC6;&#x7801;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#自动生成"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">&#x81EA;&#x52A8;&#x751F;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#手动生成"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">&#x624B;&#x52A8;&#x751F;&#x6210;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改配置文件"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#运行jupyter"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x8FD0;&#x884C;jupyter</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#终端运行"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x7EC8;&#x7AEF;&#x8FD0;&#x884C;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#后台运行"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x540E;&#x53F0;&#x8FD0;&#x884C;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#nohup后台运行"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">nohup&#x540E;&#x53F0;&#x8FD0;&#x884C;</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-训练数据集amp测试数据集"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. &#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&amp;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x96C6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-分类准确度accuracy"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. &#x5206;&#x7C7B;&#x51C6;&#x786E;&#x5EA6;accuracy</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3混淆矩阵"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.&#x6DF7;&#x6DC6;&#x77E9;&#x9635;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4精准率和召回率"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.&#x7CBE;&#x51C6;&#x7387;&#x548C;&#x53EC;&#x56DE;&#x7387;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#评价回归结果相关概念"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x8BC4;&#x4EF7;&#x56DE;&#x5F52;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5均方误差mse"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">5.&#x5747;&#x65B9;&#x8BEF;&#x5DEE;MSE</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6平均绝对误差mae"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">6.&#x5E73;&#x5747;&#x7EDD;&#x5BF9;&#x8BEF;&#x5DEE;MAE</span></a></li></ol>
         
         </div>
       </aside>
@@ -434,11 +493,7 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#python" title="python">python</a>
-                        
-                          <a class="tag" href="/tags/#jupyter" title="jupyter">jupyter</a>
-                        
-                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                          <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
                         
                     </div>
                 </section>
@@ -465,6 +520,28 @@ Jupyter Notebook 的本质是一个 Web 应用程序，便于创建和共享文�
 </article>
 
 <!-- leezc add support for mathjax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    SVG: {
+      scale: 90
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+</script>
+
 
 
 
