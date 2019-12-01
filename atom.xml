@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://anniepzk.cn/"/>
-  <updated>2019-12-01T14:29:20.928Z</updated>
+  <updated>2019-12-01T14:42:28.083Z</updated>
   <id>https://anniepzk.cn/</id>
   
   <author>
@@ -17,9 +17,24 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MachineLearning_4</title>
+    <link href="https://anniepzk.cn/article/MachineLearning-4/"/>
+    <id>https://anniepzk.cn/article/MachineLearning-4/</id>
+    <published>2019-12-01T14:42:28.000Z</published>
+    <updated>2019-12-01T14:42:28.083Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>sklearn中的数据预处理和特征工程</title>
-    <link href="https://anniepzk.cn/article/MachineLearning_3/"/>
-    <id>https://anniepzk.cn/article/MachineLearning_3/</id>
+    <link href="https://anniepzk.cn/article/MachineLearning-3/"/>
+    <id>https://anniepzk.cn/article/MachineLearning-3/</id>
     <published>2019-12-01T13:55:06.092Z</published>
     <updated>2019-12-01T14:29:20.928Z</updated>
     

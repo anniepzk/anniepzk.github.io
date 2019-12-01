@@ -18,11 +18,11 @@
 	<script async defer src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/js/buttons.js"></script>
     <title>
         
-          BasicConceptions - Annie | Blog
+          MachineLearning_4 - Annie | Blog
         
     </title>
 
-    <link rel="canonical" href="https://anniepzk.cn/article/BasicConceptions/">
+    <link rel="canonical" href="https://anniepzk.cn/article/MachineLearning-4/">
 
     <!-- Bootstrap Core CSS -->
     <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
@@ -125,14 +125,12 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
-                            
                         </div>
-                        <h1>BasicConceptions</h1>
+                        <h1>MachineLearning_4</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Annie on
-                            2019-11-21
+                            2019-12-01
                         </span>
                     </div>
                 
@@ -249,142 +247,16 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="1-训练数据集amp测试数据集">1. 训练数据集&amp;测试数据集</h3>
-<p>机器学习经过训练得到的模型，其意义在于真实环境中的使用。如果把 全部的原始数据当做训练集直接训练出模型，然后投入到真实环境中，这种做法是不恰当的，会存在问题 ：</p>
-<ol>
-<li>如果模型效果很差，没有机会通过实际调试就直接应用到实际当中，怎么办？（# 实例：股市预测）</li>
-<li>在真实环境中，开发者难以拿到真实label（输出结果），则无从得知模型的效果？（# 实例：银行发放信用卡）</li>
-</ol>
-<p>方案：训练数据集与测试数据集切分（train test split），将原始数据的80%作为训练数据来训练模型，另外20%作为测试数据，通过测试数据直接判断模型的效果，在模型进入真实环境前改进模型；</p>
-<p>1.方法一：对X和y的indexes进行乱序处理，根据乱序后的index从x和y中分割出训练数据集和测试数据集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#代码待补充</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>方法二：将X于y相加后做乱序处理，再分离出训练数据集和测试数据集</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#代码待补充</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>np.random.permutation(100)：将0~100个数随机排列；# permutation()只接受一个参数；</li>
-<li>由于对indexes的乱序处理带有随机性，如果想再次查看历史数据，可设定随机种子，得到历史随机数；</li>
-</ol>
-<h3 id="2-分类准确度accuracy">2. 分类准确度accuracy</h3>
-<p>在划分出测试数据集后，我们就可以验证其模型准确率了。在这了引出一个非常简单且常用的概念：accuracy（分类准确度）</p>
-<blockquote>
-<p>accuracy_score：函数计算分类准确率，返回被正确分类的样本比例（default）或者是数量（normalize=False）<br>
-在多标签分类问题中，该函数返回子集的准确率，对于一个给定的多标签样本，如果预测得到的标签集合与该样本真正的标签集合严格吻合，则subset accuracy =1.0否则是0.0</p>
-</blockquote>
-<p>因accuracy定义清洗、计算方法简单，因此经常被使用。但是它在某些情况下并不一定是评估模型的最佳工具。精度（查准率）和召回率（查全率）等指标对衡量机器学习的模型性能在某些场合下要比accuracy更好。</p>
-<p>分类准确度在评价分类算法时，会有很大的问题的。分类算法的评价要比回归算法多很多。</p>
-<p>对于一个癌症预测系统，输入检查指标，判断是否患有癌症，预测准确度99.9%。这个系统是好是坏呢？</p>
-<p>如果癌症产生的概率是0.1%，那其实根本不需要任何机器学习算法，只要系统预测所有人都是健康的，即可达到99.9%的准确率。也就是说对于极度偏斜(Skewed Data)的数据，只使用分类准确度是不能衡量。</p>
-<p>这是就需要使用混淆矩阵(Confusion Matrix)做进一步分析。</p>
-<h3 id="3混淆矩阵">3.混淆矩阵</h3>
-<p>对于二分类问题来说，所有的问题被分为0和1两类，混淆矩阵是2*2的矩阵：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>预测值0</strong></th>
-<th><strong>预测值1</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>真实值0</td>
-<td>9978</td>
-<td>12</td>
-</tr>
-<tr>
-<td>真实值1</td>
-<td>2</td>
-<td>8</td>
-</tr>
-</tbody>
-</table>
-<p>对于1万个人中，有9978个人本身并没有癌症，我们的算法也判断他没有癌症；有12个人本身没有癌症，但是我们的算法却错误地预测他有癌症；有2个人确实有癌症，但我们算法预测他没有癌症；有8个人确实有癌症，而且我们也预测对了。</p>
-<p>因为混淆矩阵表达的信息比简单的分类准确度更全面，因此可以通过混淆矩阵得到一些有效的指标。</p>
-<h3 id="4精准率和召回率">4.精准率和召回率</h3>
-<p>根据混淆矩阵可以求得指标：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>预测值0</strong></th>
-<th><strong>预测值1</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>真实值0</td>
-<td>9978（TN）</td>
-<td>12（FP）</td>
-</tr>
-<tr>
-<td>真实值1</td>
-<td>2（FN）</td>
-<td>8（TP）</td>
-</tr>
-</tbody>
-</table>
-<p>$$<br>
-精准率 ：precision =\frac{TP}{TP+FP},<br>
-$$<br>
-即精准率为8/(8+12)=40%。所谓的准确率是分母为所有预测为1的个数，分子是其中预测对了的个数，即预测值为1，且预测对了的比例。</p>
-<p>即精准率为8/(8+12)=40%。所谓的精准率是：分母为所有预测为1的个数，分子是其中预测对了的个数，即<strong>预测值为1，且预测对了的比例</strong>。</p>
-<p>为什么管它叫精准率呢？在有偏的数据中，我们<strong>通常更关注值为1的特征</strong>，比如“患病”，比如“有风险”。在100次结果为患病的预测，平均有40次预测是对的。即<strong>精准率为我们关注的那个事件，预测的有多准。</strong></p>
-<p>召回率：<br>
-$$<br>
-召回率：           recall =\frac{TP}{TP+FN},<br>
-$$<br>
-即精准率为8/(8+2)=80%。所谓召回率是：<strong>所有真实值为1的数据中，预测对了的个数</strong>。每当有100个癌症患者，算法可以成功的预测出8个 。<strong>也就是我们关注的那个事件真实的发生情况下，我们成功预测的比例是多少。</strong></p>
-<p>那么为什么需要精准率和召回率呢？还是下面的这个例子，有10000个人，混淆矩阵如下：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>预测值0</th>
-<th><strong>预测值1</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>真实值0</td>
-<td>9978</td>
-<td>12</td>
-</tr>
-<tr>
-<td>真实值1</td>
-<td>2</td>
-<td>8</td>
-</tr>
-</tbody>
-</table>
-<p>如果我们粗暴的认为所有人都是健康的，那算法的准确率是99.78%，但这是毫无意义的。如果算精准率则是40%，召回率是80%。</p>
-<h3 id="评价回归结果相关概念">评价回归结果相关概念</h3>
-<h3 id="5均方误差mse">5.均方误差MSE</h3>
-<p>测试集中的数据量<code>m</code>不同，因为有<strong>累加操作</strong>，所以随着数据的增加 ，误差会逐渐积累；因此衡量标准和 <code>m</code> 相关。为了抵消掉数据量的形象，可以除去数据量，抵消误差。通过这种处理方式得到的结果叫做 <strong>均方误差MSE（Mean Squared Error）</strong>：<br>
-$$<br>
-\sqrt {\frac{1}{m}\sum_{i=1}^m(y_{test}^{(i)}-\tilde{y}_{test}^{(i)})^2}<br>
-$$</p>
-<h3 id="6平均绝对误差mae">6.平均绝对误差MAE</h3>
-<p>对于线性回归算法还有另外一种非常朴素评测标准。要求真实值 与 预测结果 之间的距离最小，可以直接相减做绝对值，加m次再除以m，即可求出平均距离，被称作<strong>平均绝对误差MAE（Mean Absolute Error）</strong>：<br>
-$$<br>
-\frac{1}{m}\sum_{i=1}^m|(y_{test}^{(i)}-\tilde{y}_{test}^{(i)}|<br>
-$$<br>
-在之前确定损失函数时，我们提过，绝对值函数不是处处可导的，因此没有使用绝对值。但是在评价模型时不影响。因此模型的评价方法可以和损失函数不同。</p>
-
+                
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/MachineLearning-3/" data-toggle="tooltip" data-placement="top" title="sklearn中的数据预处理和特征工程">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/kNN/" data-toggle="tooltip" data-placement="top" title="机器学习算法_kNN的原理及实现">Next Post &rarr;</a>
+                            <a href="/article/MachineLearning-3/" data-toggle="tooltip" data-placement="top" title="sklearn中的数据预处理和特征工程">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -477,7 +349,7 @@ $$<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-训练数据集amp测试数据集"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. &#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x96C6;&amp;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x96C6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-分类准确度accuracy"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. &#x5206;&#x7C7B;&#x51C6;&#x786E;&#x5EA6;accuracy</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3混淆矩阵"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.&#x6DF7;&#x6DC6;&#x77E9;&#x9635;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4精准率和召回率"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.&#x7CBE;&#x51C6;&#x7387;&#x548C;&#x53EC;&#x56DE;&#x7387;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#评价回归结果相关概念"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x8BC4;&#x4EF7;&#x56DE;&#x5F52;&#x7ED3;&#x679C;&#x76F8;&#x5173;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5均方误差mse"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">5.&#x5747;&#x65B9;&#x8BEF;&#x5DEE;MSE</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6平均绝对误差mae"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">6.&#x5E73;&#x5747;&#x7EDD;&#x5BF9;&#x8BEF;&#x5DEE;MAE</span></a></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -497,8 +369,6 @@ $$<br>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
-                        
                     </div>
                 </section>
                 
@@ -524,28 +394,6 @@ $$<br>
 </article>
 
 <!-- leezc add support for mathjax -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    SVG: {
-      scale: 90
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
-</script>
-
 
 
 
