@@ -8,8 +8,8 @@
     </url>
 
     <url>
-        <loc>https://anniepzk.cn/article/hexo-theme-annie/</loc>
-        <lastmod>2019-11-20T11:07:50.000Z</lastmod>
+        <loc>https://anniepzk.cn/article/MachineLearning-3/</loc>
+        <lastmod>2019-12-01T14:12:13.145Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +17,15 @@
 
     <url>
         <loc>https://anniepzk.cn/article/kNN/</loc>
-        <lastmod>2019-11-20T11:07:46.000Z</lastmod>
+        <lastmod>2019-12-01T14:12:11.141Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://anniepzk.cn/article/hexo-theme-annie/</loc>
+        <lastmod>2019-12-01T14:12:09.138Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

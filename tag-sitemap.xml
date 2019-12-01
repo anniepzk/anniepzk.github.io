@@ -3,15 +3,22 @@
 
 
     <url>
-        <loc>https://anniepzk.cn/tags/Hexo/</loc>
-        <lastmod>2019-11-20T11:07:50.000Z</lastmod>
+        <loc>https://anniepzk.cn/tags/python/</loc>
+        <lastmod>2019-12-01T14:12:13.145Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://anniepzk.cn/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2019-11-20T11:07:46.000Z</lastmod>
+        <lastmod>2019-12-01T14:12:11.141Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://anniepzk.cn/tags/Hexo/</loc>
+        <lastmod>2019-12-01T14:12:09.138Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -25,13 +32,6 @@
 
     <url>
         <loc>https://anniepzk.cn/tags/jupyter/</loc>
-        <lastmod>2019-11-04T16:25:06.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://anniepzk.cn/tags/python/</loc>
         <lastmod>2019-11-04T16:25:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
