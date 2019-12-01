@@ -18,7 +18,7 @@
 	<script async defer src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/js/buttons.js"></script>
     <title>
         
-          MachineLearning_3 - Annie | Blog
+          sklearn中的数据预处理和特征工程 - Annie | Blog
         
     </title>
 
@@ -128,7 +128,7 @@
                               <a class="tag" href="/tags/#python" title="python">python</a>
                             
                         </div>
-                        <h1>MachineLearning_3</h1>
+                        <h1>sklearn中的数据预处理和特征工程</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Annie on
@@ -249,12 +249,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <center>
-    <font face="微软雅黑" size="6">
-    sklearn中的数据预处理和特征工程
-    </font>
-</center>
-<h3 id="1-sklearn中的数据预处理和特征工程">1. sklearn中的数据预处理和特征工程</h3>
+                <h3 id="1-sklearn中的数据预处理和特征工程">1. sklearn中的数据预处理和特征工程</h3>
 <p>sklearn中包含众多数据预处理和特征工程相关的模块，虽然刚接触sklearn时，大家都会为其中包含的各种算法的广度深度所震惊，但其实sklearn六大板块中有两块都是关于数据预处理和特征工程的，两个板块互相交互，为建模之前的全部工程打下基础。</p>
 <ul>
 <li>模块preprocessing：几乎包含数据预处理的所有内容</li>
@@ -325,7 +320,7 @@
 <p>MinMaxScaler在不涉及距离度量、梯度、协方差计算以及数据需要被压缩到特定区间时使用广泛，比如数字图像处理中量化像素强度时，都会使用MinMaxScaler将数据压缩于[0,1]区间之中。</p>
 <p>建议先试试看StandardScaler，效果不好再换MinMaxScaler。</p>
 <p>除了StandardScaler和MinMaxScaler之外，sklearn中也提供了各种其他缩放处理（中心化只需要一个pandas广播一下减去某个数就好了，因此sklearn不提供任何中心化功能）。比如，在希望压缩数据，却不影响数据的稀疏性时（不影响矩阵中取值为0的个数时），我们会使用MaxAbsScaler；在异常值多，噪声非常大时，我们可能会选用分位数来无量纲化，此时使用RobustScaler。更多详情请参考以下列表。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/img/article/tag.jpg" alt="home_posts_tag-true"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/anniepzk/anniepzk.github.io/img/article/%E6%97%A0%E9%87%8F%E7%BA%B2%E5%8C%96.jpg" alt="home_posts_tag-true"></p>
 
                 
 
